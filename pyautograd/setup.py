@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="py-autograd",
-    version="0.1",
+    name="pyautograd",
+    version="1.1.0",
     packages=find_packages(),
     install_requires=["numpy"],
     author="Affan Hamid",
