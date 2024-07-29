@@ -6,8 +6,8 @@ Autograd is an auto-differentiation library for scalars, designed to facilitate 
 
 - **Automatic Differentiation**: Compute gradients automatically for scalar operations.
 - **Neural Network Components**: Build neural networks using layers and neurons.
-- **Optimizers**: Implement various optimization algorithms, including Stochastic Gradient Descent.
-- **Loss Functions**: Support for common loss functions like Hinge Loss.
+- **Optimizers**: Implement optimization algorithms (Currently only Stochastic Gradient Descent)
+- **Loss Functions**: Support for common loss functions (Currently only Hinge Loss)
 
 ## Installation
 
@@ -91,7 +91,3 @@ An example of using the library can be found in the `demo.ipynb` Jupyter noteboo
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a pull request or open an issue for any suggestions or improvements.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
