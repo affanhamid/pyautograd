@@ -2,7 +2,7 @@ import unittest
 from pyautograd import Number
 
 
-class TestTensorAdd(unittest.TestCase):
+class TestScalarAdd(unittest.TestCase):
     def test_simple_add(self):
         t1 = Number(1.0)
         t2 = Number(3.9)

@@ -3,8 +3,8 @@ from pyautograd import Number
 import numpy as np
 
 
-class TestTensorAdd(unittest.TestCase):
-    def test_simple_add(self):
+class TestScalarSub(unittest.TestCase):
+    def test_simple_sub(self):
         t1 = Number(8.4)
         t2 = Number(2.1)
 

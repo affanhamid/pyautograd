@@ -59,10 +59,15 @@ class Tensor:
     def __repr__(self) -> str:
         return f"Tensor({self.data}, requires_grad={self.requires_grad})"
 
-    def __add__(self, other) -> "Tensor":
-        from .operations import _add
+    def sum(self, axis=0) -> "Tensor":
+        from .operations import Sum
 
-        return _add(self, ensure_tensor(other))
+        return Sum.forward(self, axis)
+
+    def __add__(self, other) -> "Tensor":
+        from .operations import Add
+
+        return Add.forward(self, ensure_tensor(other))
 
     def __radd__(self, other) -> "Tensor":
         return self + other
@@ -80,33 +85,56 @@ class Tensor:
         return self
 
     def __mul__(self, other) -> "Tensor":
-        from .operations import _mul
+        from .operations import ElementWiseMultiply
 
-        return _mul(self, ensure_tensor(other))
+        return ElementWiseMultiply.forward(self, ensure_tensor(other))
 
     def __rmul__(self, other) -> "Tensor":
         return self * other
 
     def __matmul__(self, other) -> "Tensor":
-        from .operations import _matmul
+        from .operations import MatrixMultiplication
 
-        return _matmul(self, other)
+        return MatrixMultiplication.forward(self, other)
 
     def __neg__(self) -> "Tensor":
-        from .operations import _neg
+        from .operations import Negative
 
-        return _neg(self)
+        return Negative.forward(self)
 
     def __sub__(self, other) -> "Tensor":
-        return self + -other
+        from .operations import Subtract
+
+        return Subtract.forward(self, ensure_tensor(other))
 
     def __rsub__(self, other) -> "Tensor":
         return -(self - other)
 
-    def __getitem__(self, idxs) -> "Tensor":
-        from .operations import _slice
+    def __getitem__(self, *idxs) -> "Tensor":
+        from .operations import Slice
 
-        return _slice(self, idxs)
+        return Slice.forward(self, *idxs)
+
+    def __pow__(self, other) -> "Tensor":
+        from .operations import Power
+
+        return Power.forward(self, other)
+
+    def __truediv__(self, other) -> "Tensor":
+        return self * (1 / other)
+
+    def activation(self, activationClass) -> "Tensor":
+        return activationClass.forward(self)
+
+    def log(self) -> "Tensor":
+        from .operations import Log
+
+        return Log.forward(self)
+
+    def exp(self) -> "Tensor":
+        from .operations import Exp
+
+        return Exp.forward(self)
 
     def backward(self, grad: "Tensor" = None) -> None:
         assert (
@@ -114,17 +142,9 @@ class Tensor:
         ), "Called backwards on a tensor that doesn't require grad"
 
         if grad is None:
-            if self.shape == ():
-                grad = Tensor(1)
-            else:
-                raise RuntimeError("grad must be specificied for non-zero tensor")
+            grad = Tensor(np.ones_like(self.data))
 
-        self.grad.data += grad.data  # type: ignore
+        self.grad.data = self.grad.data + grad.data
         for dependency in self.depends_on:
             backward_grad = dependency.grad_fn(grad.data)
             dependency.tensor.backward(Tensor(backward_grad))
-
-    def sum(self, axis=0) -> "Tensor":
-        from .operations import _tensor_sum
-
-        return _tensor_sum(self, axis)

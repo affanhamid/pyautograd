@@ -3,7 +3,7 @@ from pyautograd import Tensor
 
 
 class TestTensorMatmul(unittest.TestCase):
-    def test_simple_matmulmul(self):
+    def test_simple_matmul(self):
         t1 = Tensor([[1, 2], [3, 4], [5, 6]], requires_grad=True)
         t2 = Tensor([[10], [20]], requires_grad=True)
 
