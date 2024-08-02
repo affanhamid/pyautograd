@@ -112,21 +112,3 @@ class TestTensorLearning(unittest.TestCase):
             last_loss = np.sum(epoch_loss)
 
         assert first_loss > 2 * last_loss
-
-
-# def test_learning(self):
-#     input_size = 3
-#     X = Tensor(np.random.randn(0, input_size))
-#     y = Tensor(np.array([14]))
-#     w1 = Tensor(np.random.randn(input_size, 10))
-#     b1 = Tensor(np.random.randn(10))
-#     z1 = X @ w1 + b1
-#     a1 = z1.activation(ReLU)
-
-#     w2 = Tensor(10, 1)
-#     b2 = Tensor(1)
-
-#     print(a1.shape, w1.shape)
-#     z2 = a1 @ w2 + b2
-
-#     assert 1 == 2

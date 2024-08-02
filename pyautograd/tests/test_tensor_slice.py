@@ -1,9 +1,8 @@
 import unittest
 from pyautograd import Tensor
-import numpy as np
 
 
-class TestTensorMul(unittest.TestCase):
+class TestTensorSlice(unittest.TestCase):
     def test_simple_mul(self):
         t1 = Tensor([[1, 2, 3], [4, 5, 6], [7, 8, 9]], requires_grad=True)
 
