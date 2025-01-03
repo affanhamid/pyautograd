@@ -1,4 +1,4 @@
-# Autograd
+# PyAutograd
 
 Autograd is an auto-differentiation library for scalars and tensors, designed to facilitate the implementation of machine learning models. It provides a simple interface for defining and training neural networks using automatic differentiation.
 
