@@ -14,7 +14,7 @@ Autograd is an auto-differentiation library for scalars and tensors, designed to
 To install the library, clone the repository:
 
 ```bash
-pip install py-autograd
+pip install pyautograd
 ```
 
 The only requirement is `numpy`
